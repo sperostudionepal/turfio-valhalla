@@ -42,5 +42,5 @@ export build_elevation=False
 export build_admins=False
 export build_time_zones=False
 
-echo "Starting Valhalla service..."
-exec /valhalla/scripts/run.sh valhalla_service
+echo "Starting Valhalla service directly..."
+exec valhalla_service "$DATA_DIR/valhalla.json" "${SERVER_THREADS:-1}"
