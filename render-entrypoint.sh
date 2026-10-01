@@ -14,11 +14,23 @@ if [ ! -f "$MARKER" ]; then
   curl --fail --location --retry 3 --output "$ARCHIVE" "$VALHALLA_DATA_URL"
   tar -xzf "$ARCHIVE" -C "$DATA_DIR"
   rm -f "$ARCHIVE"
-  test -f "$DATA_DIR/valhalla.json"
-  test -f "$DATA_DIR/valhalla_tiles.tar"
-  test -f "$DATA_DIR/admin_data/admins.sqlite"
-  test -f "$DATA_DIR/timezone_data/timezones.sqlite"
-  touch "$MARKER"
+  echo "Dataset extracted. Contents:"
+find "$DATA_DIR" -maxdepth 3 -type f -print
+
+for required_file in \
+  "$DATA_DIR/valhalla.json" \
+  "$DATA_DIR/valhalla_tiles.tar" \
+  "$DATA_DIR/admin_data/admins.sqlite" \
+  "$DATA_DIR/timezone_data/timezones.sqlite"
+do
+  if [ ! -f "$required_file" ]; then
+    echo "ERROR: Required Valhalla file missing: $required_file"
+    exit 1
+  fi
+done
+
+echo "All required Valhalla files verified."
+touch "$MARKER"
 fi
 
 # Render requires the service to bind to its assigned PORT. The GIS-OPS image
