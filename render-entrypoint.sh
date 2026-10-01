@@ -12,7 +12,7 @@ mkdir -p "$DATA_DIR"
 if [ ! -f "$MARKER" ]; then
   echo "Downloading prebuilt Nepal Valhalla dataset..."
   curl --fail --location --retry 3 --output "$ARCHIVE" "$VALHALLA_DATA_URL"
-  tar -xzf "$ARCHIVE" -C "$DATA_DIR" --strip-components=1
+  tar -xzf "$ARCHIVE" -C "$DATA_DIR"
   rm -f "$ARCHIVE"
   test -f "$DATA_DIR/valhalla.json"
   test -f "$DATA_DIR/valhalla_tiles.tar"
