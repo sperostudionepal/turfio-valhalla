@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: turfio-valhalla
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /status
+    envVars:
+      - key: VALHALLA_DATA_URL
+        sync: false
+      - key: SERVER_THREADS
+        value: "1"

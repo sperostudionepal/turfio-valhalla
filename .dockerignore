@@ -1,0 +1,7 @@
+.git
+.env
+.env.*
+.DS_Store
+custom_files
+valhalla-nepal-production
+*.osm.pbf

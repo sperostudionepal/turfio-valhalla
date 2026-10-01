@@ -1,0 +1,23 @@
+services:
+  valhalla:
+    image: gisops/valhalla:latest
+    container_name: active_valhalla_engine
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./custom_files:/custom_files
+    environment:
+      - tile_urls=https://download.geofabrik.de/asia/nepal-latest.osm.pbf
+      - build_elevation=False
+      - build_admins=True
+      - build_time_zones=True
+      - force_rebuild=True
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8002/status || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 15s
+    restart: always
+
+
