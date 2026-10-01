@@ -42,4 +42,5 @@ export build_elevation=False
 export build_admins=False
 export build_time_zones=False
 
-exec /valhalla/scripts/run.sh
+echo "Starting Valhalla service..."
+exec /valhalla/scripts/run.sh valhalla_service
